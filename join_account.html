@@ -3,12 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Join</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="../css/joinAcc.css" rel="stylesheet" type="text/css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<style>
+	.nanum-gothic-regular {
+	  font-family: "Nanum Gothic", sans-serif;
+	  font-weight: 700;
+	  font-style: normal;
+}
+</style>
 </head>
 <body>
 	<div id="header">
 		<div id="header_menu" class="header_common">
-			<a href="#" class="button"><img src="#" id="logo"></a>
+			<a href="img\KakaoTalk_20240609_174621284_modified.png" class="button"><img src="#" id="logo"></a>
 			<a href="#" id="main" class="button">레시피</a>	
 			<a href="#" id="tip" class="button">꿀팁</a>
 			<a href="#" id="comm" class="button">메뉴 추천</a>
@@ -27,33 +38,45 @@
 		</div>
 	</div>
 	<div id="mainDiv">
-		<div class="infor">회원가입</div>
-		<form>
+		<div class="join_title">
+			<p>회원가입</p>
+		</div>
+		<form action="" method="post">
 			<div id="join_table_div">
 				<table id="join_table" border="1">
 					<tr>
 						<th>아이디 : </th>
-						<td><input type="text" id="join_id" class="join input"/></td>
+						<td>
+							<input type="text" id="join_id" class="joinInput" name="joinId" placeholder="(필수 입력)"/>
+						</td>
+						<td style='text-align: right'>
+							<span id="inforId">중복 아이디입니다. &nbsp;</span>
+						</td>
 					</tr>
 					<tr>
 						<th>비밀번호 : </th>
-						<td><input type="password" id="join_pwd" class="join input"/></td>
+						<td colspan="2"><input type="password" id="join_pwd" class="joinInput" name="joinPwd" placeholder="(필수 입력)"/></td>
 					</tr>
 					<tr>
 						<th>비밀번호 확인 : </th>
-						<td><input type="password" id="join_pwd2" class="join input"/></td>
+						<td>
+							<input type="password" id="join_rePwd" class="joinInput" name="joinRePwd" placeholder="(필수 입력)"/>
+						</td>
+						<td style='text-align: right'>
+							<span id="inforPwd"> &nbsp;</span>
+						</td>
 					</tr>
 					<tr>
 						<th>이름 : </th>
-						<td><input type="text" id="join_name" class="join input"/></td>
+						<td colspan="2"><input type="text" id="join_name" class="joinInput" name="joinName" placeholder="(필수 입력)"/></td>
 					</tr>
 					<tr>
 						<th>주민등록번호 : </th>
-						<td><input type="text" id="join_no" class="join input"/></td>
+						<td colspan="2"><input type="text" id="join_no" class="joinInput" name="joinIdenNum" placeholder="(필수 입력)"/></td>
 					</tr>
 					<tr>
-						<th>휴대폰번호 : </th>
-						<td><input type="text" id="join_phone" class="join input"/></td>
+						<th class="lastTr">휴대폰번호 : </th>
+						<td class="lastTr" colspan="2"><input type="text" id="join_phone" class="joinInput" name="joinPhone" placeholder="(필수 입력)"/></td>
 					</tr>
 				</table>
 			</div>
@@ -69,5 +92,44 @@
 			<div id="address" class="font">주소: 서울특별시 을지로입구역 근처</div>
 		</div>
 	</div>
+	
+	<script>
+		const inputs = document.getElementsByClassName('joinInput');
+		const button = document.getElementById('join_button');
+		let pwd = document.getElementById('join_pwd');
+		let rePwd = document.getElementById('join_rePwd');
+		const inforPwd = document.getElementById('inforPwd');
+		let id = document.getElementById('join_id');
+		
+		button.addEventListener('click', e => {			
+			console.log(pwd.value === rePwd.value);
+			let count = 0;
+			for(const input of inputs){
+				if(input.value.trim() == ''){
+					count++;
+				}
+			}
+			if(count <= 6 && count > 0){
+				e.preventDefault();
+				alert('필수 항목을 입력해 주세요.');
+			}
+		});
+		
+		const pwdCheck = () => {
+			if(pwd.value === rePwd.value && pwd.value.trim() != ''){
+				inforPwd.innerText = '사용 가능한 비밀번호입니다.';
+				inforPwd.style.color = 'green';
+			} else {
+				inforPwd.innerText = '비밀번호가 일치하지 않습니다.';
+				inforPwd.style.color = 'red';
+				return false;
+			}
+		}
+		pwd.addEventListener('focusout', pwdCheck);
+		rePwd.addEventListener('focusout', pwdCheck);
+		
+		
+		
+	</script>
 </body>
 </html>
