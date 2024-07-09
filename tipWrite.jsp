@@ -29,7 +29,7 @@
                 <div class="input-group mb-3" id="write_title">
                     <input type="text" name="honey_write_title" class="form-control" id="honey_write_title" aria-label="Username" required aria-describedby="basic-addon1" placeholder="제목 입력">
                 </div>
-                <!-- 본문 최대 몇글자까지 제한 아직 미구현 -->
+                
                 <div>
                     <textarea class="form-control" name="honey_write_text" placeholder="내용을 입력해주세요." id="honey_write_text"  required></textarea>
                 </div>
