@@ -35,7 +35,7 @@
 }
 
 #loud_speaker {
-            background: url('food.png') no-repeat left center;
+            background: url(../image/'food.png') no-repeat left center;
             background-size:30px 30px;
             padding-left: 55px; 
             padding-right: 70px; 
@@ -69,9 +69,6 @@
 	background-color: #a5250a;
 }
 
-
-
-
 #honey_table_div{background:white;
 				width: 70%;
 				margin-left:15%;			
@@ -96,6 +93,7 @@
 				font-size:20px
 				}
 #search_button{width:80px;}
+
 #search_button:hover {
 	font-weight: bold;
 	background-color: #a5250a;
