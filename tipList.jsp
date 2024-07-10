@@ -62,10 +62,10 @@
 		<tbody class="table-group-divider" style="text-align:center;">
 			<c:forEach items="${ list }" var="b">
 			    <tr>
-			      <td scope="row">${b.BOARD_NO }</td>
-			      <td scope="row">${b.WRITER }</td>
-			      <td scope="row">${b.TITLE }</td>
-			      <td style="text-align:left;">${ b.CREATE_DATE }</td>
+			      <td scope="row">${b.boardNo}</td>
+                  <td><a href="${contextPath}/detail.tip?bNo=${b.boardNo}">${b.title}</a></td>
+			      <td scope="row">${b.writer }</td>
+			      <td style="text-align:left;">${ b.createDate }</td>
 			    </tr>
 			</c:forEach>    
 		</tbody>
@@ -99,18 +99,17 @@
 	
 				
 <script>
-		window.onload=()=>{
-			const tbody = document.querySelector('tbody');
-			const tds = tbody.querySelectorAll('td');
-			for(const td of tds){
-				td.addEventListener('click', function(){
-					const trTds = this.parentElement.querySelectorAll('td');   
-					const boardId = trTds[0].innerText;
-					location.href="${contextPath}/write.tip?bNo=" + BOARD_NO + "&page=" + ${pi.currentPage};
-				})
-			}			
-		}
-	</script>
+    window.onload = () => {
+        const tbody = document.querySelector('tbody');
+        const tds = tbody.querySelectorAll('td');
+        for(const td of tds) {
+            td.addEventListener('click', function() {
+                const boardNo = this.parentElement.querySelector('td:first-child').innerText;
+                location.href = "${contextPath}/write.tip?bNo=" + boardNo + "&page=" + ${pi.currentPage};
+            });
+        }
+    };
+</script>
 
 
 
