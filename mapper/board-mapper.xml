@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+	<select id="selectMyBoard" resultType="Board">
+		select * from board where board_no = #{boardNo}
+	</select>
+	
+	<select id="selectRecipe" resultType="Recipe">
+		select * from recipe where board_no = #{boardNo}
+	</select>
+	
+	<select id="selectImage" resultType="Image">
+		select * from image where recipe_no = #{recipeNo}
+	</select>
+	
+	<select id="randomChoice" resultType="RandomRecipe">
+		select board.board_no, board.title, image.img_no, recipe.recipe_no, image.image_URL, image.image_name
+		from board
+			join recipe using(board_no)
+			join image on(recipe.recipe_no=image.recipe_no)	
+		where board.board_genre = '레시피'
+			and board.status = 'Y'
+			and image.title_img = 0
+			and recipe.nation in 
+			<foreach item="item" collection="nation" open="(" separator="," close=")">
+			#{item}
+			</foreach>
+			and recipe.difficulty in
+			<foreach item="item" collection="difficulty" open="(" separator="," close=")">
+			#{item}
+			</foreach>	
+	</select>
+	
+	 <select id="getListCount" resultType="_int">
+      select count(*)
+      from board
+      where status = 'Y' and board_genre = #{i}
+   </select>
+  
+	<select id="tipListView" resultType="Board">   
+		select * 
+		from board
+		where status='Y'and board_genre=#{i}
+		order by create_date desc
+	</select>
+  
+	<select id="selectTip" resultType="Board">
+		select * 
+		from board
+		   join member on(writer = id)
+		where board.status = 'Y' and board_No = #{i} 
+	</select>
+	
+	<update id="updateCount">
+		update board
+		set board_count = board_count + 1
+		where board_no = #{bNo}
+	</update>
+  
+	<insert id="insertTip" useGeneratedKeys="true">
+		<selectKey resultType="_int" keyProperty="boardNo" order="BEFORE">
+			select seq_board.nextval from dual
+		</selectKey>
+		insert into board
+		values(#{boardNo}, #{boardGenre}, #{writer}, #{title}, #{content}, sysdate, sysdate, default, default )
+	</insert>
+    
+	<update id="updateTip">
+		update board 
+		set title=#{title}, content=#{content}, update_date=sysdate
+		where board_no = #{boardNo}	
+	</update>
+ 
+	<update id="deleteTip">
+		update board
+		set status='N'
+		where board_no = #{bNo}
+	</update>
+	
+	<select id="searchTip" parameterType="map" resultType="Board">
+        SELECT *
+        FROM board
+        WHERE 
+            <choose>
+                <when test="searchType == 'writer'">
+                    writer LIKE CONCAT('%', #{honeyKeyword}, '%')
+                </when>
+                <when test="searchType == 'title'">
+                    title LIKE CONCAT('%', #{honeyKeyword}, '%')
+                </when>
+                <when test="searchType == 'content'">
+                    content LIKE CONCAT('%', #{honeyKeyword}, '%')
+                </when>
+                <when test="searchType == 'title_content'">
+                    title LIKE CONCAT('%', #{honeyKeyword}, '%')
+                    OR content LIKE CONCAT('%', #{honeyKeyword}, '%')
+                </when>
+            </choose>
+        ORDER BY board_no DESC
+    </select>
+	
+</mapper>
