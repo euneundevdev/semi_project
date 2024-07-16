@@ -1,130 +1,128 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
-
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-<link href="resources/css/tipContent.css" rel="stylesheet" type="text/css"/>
 <title>Insert title here</title>
-
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<link href="resources/css/tipComment.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body style="background-color:#fffbf2;">
 	<jsp:include page="../common/header.jsp"/>
-	
-	<div class="container-fluid">
-				
-		<div id="honey_title">
-    		<p>꿀팁 게시판</p>
-  		</div>
-  		
-  		
-
-  	<c:if test="${ !empty loginUser && loginUser.id eq b.writer}">	 	
-		<div id ="honey_up_del" >
-			<button class="btn btn-primary me-md-2" role="button" id ="updateButton">수정</button>
-			<button class="btn btn-primary me-md-2" role="button" id ="deleteButton">삭제</button>
-		</div>			
-	</c:if>
-				
-	<div>
-		<form method="POST" id="detailForm"	>	
-			<input type="hidden" value="${ b.boardNo }" name="bNo"/>
-			<input type="hidden" value="${ page }" name="page"/>
-				<div class="input-group mb-3" id="content_title">
-		 			<span style="width:12%;" class="form-control" id="notic_content_writer" aria-label="Username" aria-describedby="basic-addon1">${b.writer }</span>
-		 			<span style="width:73%;"class="form-control" id="notic_content_title" aria-label="Username" aria-describedby="basic-addon1">${b.title }</span>
-		 			<span style="width:15%;"class="form-control" id="notic_content_createDate" aria-label="Username" aria-describedby="basic-addon1">${b.createDate }</span>
-				</div>
-
-				<div>
-					<p id="notic_content_text" style="resize: none;" readonly>${b.content }</p>
-				</div>		
-			</form>
-	</div>
-
-		<div class="mx-auto" style="width:80px;">
-			<a class="btn btn-primary me-md-2" href="'${contextPath}/tip.tip'" role="button" id ="go_list_button">목록</a>
-		</div>
-	
-	<div class="modal fade" tabindex="-1" role="dialog" id="modalChoice">
-			<div class="modal-dialog" role="document">
-	    		<div class="modal-content rounded-3 shadow">
-	      			<div class="modal-body p-4 text-center">
-	        			<h3 class="mb-0">정말로 삭제하시겠습니까?</h3>
-	        			<p class="mb-0">삭제 후 게시글은 복구할 수 없습니다.</p>
-	      			</div>
-	      			<div class="modal-footer flex-nowrap p-0">
-	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" id="delete">네</button>
-	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">아니오</button>
-	      			</div>
-	    		</div>
-	  		</div>
-		</div>
+	<div style="margin-left: 10rem !important; margin-right: 10rem !important; margin-top:2rem !important; background-color:white;" class="row py-lg-5" >
+		<form>
+			<div class="input-group mb-3" id="search_receipe">
+	 			<input type="text" class="form-control" name="noticeKey" placeholder="레시피를 찾아보세요" aria-label="Recipient's username" aria-describedby="search_button">
+	 			<button class="btn btn-outline-secondary" id="search_button">검색</button>
+			</div>
+		</form>
+			
+			
+			<table class="comment_table " border="1"  style="width: 1000px; margin-left:215px;">
+				<thead>
+					<tr>
+						<th style="text-align: center;">${ b.writer }</th>
+					    <th>${ b.boardTitle }</th>
+					    <th style="text-align: center;">${ b.boardCreateDate }</th>
+					</tr>
+				</thead>
+				<tbody class="table-group-divider">
+					<tr>
+						<td colspan="3" >${ b.boardContent }</td>
+					</tr>
+				</tbody>
+			</table>
 		
-		<a class="btn" href="#hearder" role="button" id ="go_top_button">
-			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-up-fill" viewBox="0 0 16 16">
-  			<path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-			</svg>
-			TOP
-		</a>
-		
-	<div>
-		<jsp:include page="../common/footer.jsp"/>
-	</div>
 	
+	
+	<form>
+		<div>
+			<div class="input-group mb-3" id="comment">
+	 			<input type="text" class="form-control" id="replyContent" name="noticeKey" placeholder="댓글을 적어주세요">
+	 			<button class="btn btn-outline-secondary" id="search_button">등록</button>
+			</div>	
+		</div>
+	</form>	
+
+	<div class="div-flexible div-center" style="height: 50px"></div>
+
+
+
+	<div id="honey_table_div">	
+			<div id="honey_table">
+				<table class="table table-hover " style="width: 1300px; margin-left:50px;" >
+				  <thead>
+				    <tr>
+						<th scope="col" style="width: 100px; font-weight:700; text-align: center; ">글번호</th>
+						<th scope="col" style="width: 200px; font-weight:700; text-align: center;">ID</th>
+						<th scope="col" style="width: 600px; font-weight:700; ">댓글 내용</th>
+						<th scope="col" style="width: 100px; font-weight:700; text-align: center;">작성일</th>
+						<th scope="col" style="width: 300px; font-weight:700; text-align: center;">수정/삭제</th>
+				    </tr>
+				  </thead>
+				  <tbody class="table-group-divider" >
+				    
+				    	<c:forEach items="${ list }" var="r">
+							<tr>
+								<td>${ r.replyNo }</td>
+								<td>${ r.replyWriter }</td>
+								<td>${ r.replyContent }</td>
+								<td>${ r.replyCreateDate }</td>
+								<td>${ r.replyStatus }</td>
+								<td>
+									<input type="hidden" value="${r.replyId }" name="replyId">
+									<c:if test="${ r.replyWriter eq loginUser.id }">
+										<span class="updel">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16"><path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/></svg>
+										</span> 
+										&nbsp;
+										<span class="updel">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/></svg>
+										</span> 
+									</c:if>
+									<input type="hidden" value="${ r.replyContent }" id="replyContent">
+								</td>
+							</tr>
+						</c:forEach>
+				  </tbody>
+				</table>			
+			</div>
+			<div class = "honeyWritePage-container">
+				<a class="btn btn-primary me-md-3" href="${ contextPath }/write.tip" role="button" id ="honey_write_button">글쓰기</a>
+			</div>
+			<div class="mx-auto" id="page_navigation" style="width: 230px;">
+		   		<ul class="pagination pagination-sm">
+				    <li class="page-item"><a class="page-link" href="#">이전</a></li>
+				    <li class="page-item"><a class="page-link" href="#">1</a></li>
+				    <li class="page-item"><a class="page-link" href="#">2</a></li>
+				    <li class="page-item"><a class="page-link" href="#">3</a></li>
+				    <li class="page-item"><a class="page-link" href="#">4</a></li>
+				    <li class="page-item"><a class="page-link" href="#">5</a></li>
+				    <li class="page-item"><a class="page-link" href="#">다음</a></li>
+			  	</ul>
+			</div>
+		</div>	
+	</div>
+	<div class="mx-auto" style="margin-top: 20px; width:100px; height: 100px;">
+		<a class="btn btn-primary me-md-2" role="button" id="plus-level" href="#">목록으로</a>
+	</div>
+	<jsp:include page="../common/footer.jsp"/>
 	<script>
-		window.onload=()=>{
-			
-			const update = document.getElementById('updateButton')
-			const form = document.getElementById('detailForm')
-			if(update != null){
-				update.addEventListener('click', ()=>{
-					form.action = '${contextPath}/updateForm.tip';
-						form.submit();
+		window.onload = () =>{
+			document.getElementById('search_button').addEventListener('click', () =>{
+				$.ajax({
+					uri: '${contextPath}/insertReply.bo',
+					data: {replyContent: document.getElementById('replyContent').value}
+					dataType: 'json', 
+					success: data => {
+						console.log(data);
+						
+					},
 				});
-			}
-
-			if(document.getElementById('deleteButton') != null){
-				document.getElementById('deleteButton').addEventListener('click',() => {
-					$('#modalChoice').modal('show');
-				});
-			}
-			
-			// 모달에서 네 누르면 딜리트 넘어가기
-			document.getElementById('delete').addEventListener('click',()=>{
-				form.action = '${contextPath}/delete.tip';
-				form.submit();
 			});
 		}
-			
-			
-		
-		
-		
-			
-			
-			
-			
 	</script>
-	
-	</div>
-		
-	
-	
-	
-			
-			
-			
-	
 </body>
 </html>
