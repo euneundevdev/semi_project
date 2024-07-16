@@ -9,26 +9,26 @@
 		select * from recipe where board_no = #{boardNo}
 	</select>
 	
-	<select id="selectImage" resultType="Image">
-		select * from image where recipe_no = #{recipeNo}
-	</select>
-	
 	<select id="randomChoice" resultType="RandomRecipe">
-		select board.board_no, board.title, image.img_no, recipe.recipe_no, image.image_URL, image.image_name
+		select board_no, board.title, image.image_no, recipe.recipe_no, image.image_URL, image.image_name
 		from board
 			join recipe using(board_no)
 			join image on(recipe.recipe_no=image.recipe_no)	
 		where board.board_genre = '레시피'
 			and board.status = 'Y'
 			and image.title_img = 0
-			and recipe.nation in 
-			<foreach item="item" collection="nation" open="(" separator="," close=")">
-			#{item}
-			</foreach>
-			and recipe.difficulty in
-			<foreach item="item" collection="difficulty" open="(" separator="," close=")">
-			#{item}
-			</foreach>	
+			<if test="!nation.isEmpty()">
+				and recipe.nation in 
+				<foreach item="item" collection="nation" open="(" separator="," close=")" >
+					#{item}
+				</foreach>
+			</if>
+			<if test="!difficulty.isEmpty()">
+				and recipe.difficulty in
+				<foreach item="item" collection="difficulty" open="(" separator="," close=")">
+					#{item}
+				</foreach>	
+			</if>
 	</select>
 	
 	 <select id="getListCount" resultType="_int">
@@ -36,13 +36,6 @@
       from board
       where status = 'Y' and board_genre = #{i}
    </select>
-  
-	<select id="tipListView" resultType="Board">   
-		select * 
-		from board
-		where status='Y'and board_genre=#{i}
-		order by create_date desc
-	</select>
   
 	<select id="selectTip" resultType="Board">
 		select * 
@@ -77,26 +70,63 @@
 		where board_no = #{bNo}
 	</update>
 	
-	<select id="searchTip" parameterType="map" resultType="Board">
-        SELECT *
-        FROM board
-        WHERE 
+    <insert id="insertReply" useGeneratedKeys="true">
+		<selectKey resultType="_int" keyProperty="replyNo" order="BEFORE">
+			select seq_reply.nextval from dual  		
+		</selectKey>	
+		insert into reply
+		values(#{replyNo}, #{writer}, #{boardNo}, #{content}, sysdate, sysdate, default)	
+	</insert>
+
+	<update id="deleteReply">
+		update reply
+		set status = 'N'
+		where reply_no = #{replyNo}	
+	</update>
+	
+	
+	<update id="updateReply" useGeneratedKeys="true">	
+		update reply
+		set content = #{content}
+		where reply_no = #{replyNo}	
+	</update>
+	
+	<select id="selectReply" resultType="Reply">
+		select *
+		from reply
+		where reply_no = #{replyNo}
+	</select>
+	
+	<select id="rpList" resultType="Reply">
+		select *
+		from reply
+		where board_no = #{boardNo}
+	</select>
+
+	<select id="tipListView" parameterType="map" resultType="Board">
+        select *
+        from board join member on(id = writer) 
+        where board_genre='꿀팁' and board.status='Y'
             <choose>
                 <when test="searchType == 'writer'">
-                    writer LIKE CONCAT('%', #{honeyKeyword}, '%')
+                   and writer like '%' || #{honeyKeyword} || '%'
                 </when>
                 <when test="searchType == 'title'">
-                    title LIKE CONCAT('%', #{honeyKeyword}, '%')
+                   and title like '%' || #{honeyKeyword} || '%'
                 </when>
                 <when test="searchType == 'content'">
-                    content LIKE CONCAT('%', #{honeyKeyword}, '%')
-                </when>
-                <when test="searchType == 'title_content'">
-                    title LIKE CONCAT('%', #{honeyKeyword}, '%')
-                    OR content LIKE CONCAT('%', #{honeyKeyword}, '%')
+                  and  board.content like '%' || #{honeyKeyword} || '%'
                 </when>
             </choose>
-        ORDER BY board_no DESC
-    </select>
+            order by board_no desc
+    
+    
+    
+    </select>	
+	
+	
+	
+	
+	
 	
 </mapper>
