@@ -1,0 +1,20 @@
+	// 꿀팁 목록 페이지 이동
+	@RequestMapping("tip.tip")
+	public String tipListView(@RequestParam(value="page", defaultValue="1")int currentPage, Model model) {
+		
+		// 게시글 불러오고 숫자 셈
+		int listCount = bService.getListCount("꿀팁");
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 10);
+		
+		ArrayList<Board> list = bService.tipListView(pi, "꿀팁");
+		
+		if(list!=null) {
+			model.addAttribute("list", list);
+			model.addAttribute("pi",pi);
+		
+			return "tipList";
+		} else {
+			throw new AllException("게시글 조회 실패.");
+		}
+	}
