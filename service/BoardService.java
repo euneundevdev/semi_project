@@ -1,8 +1,8 @@
 package com.project.aloneBab.board.model.service;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.project.aloneBab.board.model.vo.Board;
 import com.project.aloneBab.board.model.vo.DivideSearch;
@@ -11,6 +11,7 @@ import com.project.aloneBab.board.model.vo.RandomRecipe;
 import com.project.aloneBab.board.model.vo.Recipe;
 import com.project.aloneBab.board.model.vo.Reply;
 import com.project.aloneBab.common.PageInfo;
+import com.project.aloneBab.notice.model.vo.Notice;
 
 public interface BoardService {
 
@@ -38,29 +39,29 @@ public interface BoardService {
 
 	ArrayList<Board> selectRecommendBoardList(String nation);
 
-//	ArrayList<Recipe> selectDivideRecipeList(DivideSearch ds);
-//
-//	ArrayList<Image> selectDivdeImageList(DivideSearch ds);
+	int updateRecipe(Recipe recipe);
+
+	void deleteImage(int recipeNo);
+
+	int updateBoard(Board b);
+
+	int editImage(ArrayList<Image> iList);
+
+	ArrayList<Reply> selectReplyList(Integer bNo);
+	
+	ArrayList<RandomRecipe> randomChoice(HashMap<String, Object> key);
 
 	Board selectMyBoard(int boardNo);
 
 	Recipe selectRecipe(int boardNo);
-
-	ArrayList<Image> selectImage(int recipeNo);
-	
-	ArrayList<RandomRecipe> randomChoice(HashMap<String, Object> key);
 	
 	Board tipcomment(int bId, String id);
-
-	ArrayList<Reply> selectReply(int bId);
 	
-	int insertReply(Reply r);
-
 	ArrayList<Reply> tipcomment(PageInfo pi);
-	
+
 	int getTipListCount(String i);
 
-	ArrayList<Board> tipListView(PageInfo pi, String string);
+	ArrayList<Board> tipListView(PageInfo pi, HashMap<String, String> map);
 
 	int insertTip(Board b);
 
@@ -71,7 +72,17 @@ public interface BoardService {
 	int deleteTip(int bNo);
 
 	ArrayList<Board> searchTip(String searchType, String honeyKeyword);
+	
+	int insertReply(Reply rp);
 
+	int deleteReply(int replyNo);
 
+	int updateReply(Reply rp);
+
+	Reply selectReply(Reply rp);
+	
+	ArrayList<Reply> rpList(int bNo);
+
+	Notice noticeCommon();
 
 }
