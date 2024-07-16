@@ -7,10 +7,33 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-	<link href="resources/css/tipList.css" rel="stylesheet" type="text/css"/>
+	<link href="resources/css/tipList.css?after" rel="stylesheet" type="text/css"/>
 	<title>Insert title here</title>	
 	<style>
 	
+	@font-face {
+	    font-family: 'MinSans-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	@font-face {
+	    font-family: 'MinSans-Bold';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Bold.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
+	#loud_speaker {
+            background: url('../image/food.png') no-repeat left center;
+            background-size:30px 30px;
+            padding-left: 55px; 
+            padding-right: 70px; 
+            background-position: 10px center;
+            height: 40px; 
+        }
+        
+}
 	</style>
 	
 	</head>
@@ -24,21 +47,20 @@
 	  		</div>
 			<br>
 	  		
-	  		<!-- 최근 공지 출력바  -->
+	  		<!-- 최근 공지 출력바 -->
 			<div id="notice_recent">
 		  		 <input class="form-control" id="loud_speaker" type="text" value="최근 공지사항이에요." aria-label="readonly input example" readonly>
 			</div>
 	  		
 	  		<br>
 	 		
-			<!-- 레시피 검색--> 		
+			<!--꿀팁 검색--> 		
 			<form>
-				<div class="input-group mb-3" id="search_receipe">
+				<div class="input-group mb-3" id="honeySearchArea">
 				<select name="searchType">
-				<option value="writer" <c:if test="${searchType eq 'writer'}">selected</c:if>>작성자</option>
-				<option value="title" <c:if test="${searchType eq 'title'}">selected</c:if>>제목</option>
-				<option value="content" <c:if test="${searchType eq 'content'}">selected</c:if>>내용</option>
-				<option value="title_content" <c:if test="${searchType eq 'title_content'}">selected</c:if>>제목+내용
+					<option value="writer" <c:if test="${searchType eq 'writer'}">selected</c:if>>작성자</option>
+					<option value="title" <c:if test="${searchType eq 'title'}">selected</c:if>>제목</option>
+					<option value="content" <c:if test="${searchType eq 'content'}">selected</c:if>>내용</option>
 				</option>
 			</select>
 		 			<input type="text" class="form-control" name="honeyKeyword" id="search_receipe2" placeholder="꿀팁 검색란" aria-label="Recipient's username" aria-describedby="search_button">
@@ -97,8 +119,24 @@
 		       }
 		   };
 		
-		   
-		   
+		   const loud_speaker = document.getElementById("loud_speaker");
+			
+			$.ajax({
+				url : '${contextPath}/noticeCommon.no',
+				dataType : 'json',
+				success: data =>{
+					if(data != null){
+						loud_speaker.value = data.boardTitle;
+						
+						loud_speaker.addEventListener('click', ()=>{
+							location.href='${contextPath}/noticeSelect.no?boardNo='+data.boardNo;
+						});
+						
+					}
+				},
+				error:data => console.log(data)
+			});
+			
 		</script>
 	
 	</body>
