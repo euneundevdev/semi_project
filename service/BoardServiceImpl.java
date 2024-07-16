@@ -2,7 +2,6 @@ package com.project.aloneBab.board.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import com.project.aloneBab.board.model.vo.RandomRecipe;
 import com.project.aloneBab.board.model.vo.Recipe;
 import com.project.aloneBab.board.model.vo.Reply;
 import com.project.aloneBab.common.PageInfo;
+import com.project.aloneBab.notice.model.vo.Notice;
 
 
 @Service("bService")
@@ -96,16 +96,37 @@ public class BoardServiceImpl implements BoardService {
 		return bDAO.selectRecommendBoardList(sqlSession, nation);
 	}
 
-//	@Override
-//	public ArrayList<Recipe> selectDivideRecipeList(DivideSearch ds) {
-//		return bDAO.selectDivideRecipeList(sqlSession,ds);
-//	}
-//
-//	@Override
-//	public ArrayList<Image> selectDivdeImageList(DivideSearch ds) {
-//		return bDAO.selectDivdeImageList(sqlSession,ds);
-//	}
+	@Override
+	public int updateRecipe(Recipe recipe) {
+		return bDAO.updateRecipe(sqlSession, recipe);
+	}
 
+	@Override
+	public void deleteImage(int recipeNo) {
+		bDAO.deleteImage(sqlSession,recipeNo);
+	}
+
+	@Override
+	public int updateBoard(Board b) {
+		return bDAO.updateBoard(sqlSession, b);
+	}
+
+	@Override
+	public int editImage(ArrayList<Image> iList) {
+		return bDAO.editImage(sqlSession, iList);
+	}
+
+	@Override
+	public ArrayList<Reply> selectReplyList(Integer bNo) {
+		return bDAO.selectReplyList(sqlSession, bNo);
+	}
+	
+	@Override
+	public ArrayList<RandomRecipe> randomChoice(HashMap<String, Object> key) {
+		// TODO Auto-generated method stub
+		return bDAO.randomChoice(sqlSession, key);
+	}
+	
 	@Override
 	public Board selectMyBoard(int boardNo) {
 		return bDAO.selectMyBoard(sqlSession, boardNo);
@@ -114,17 +135,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Recipe selectRecipe(int boardNo) {
 		return bDAO.selectRecipe(sqlSession, boardNo);
-	}
-	
-	@Override
-	public ArrayList<Image> selectImage(int recipeNo) {
-		return bDAO.selectImage(sqlSession, recipeNo);
-	}
-	
-	@Override
-	public ArrayList<RandomRecipe> randomChoice(HashMap<String, Object> key) {
-		// TODO Auto-generated method stub
-		return bDAO.randomChoice(sqlSession, key);
 	}
 	
 	@Override
@@ -140,31 +150,11 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return null;
 	}
-
-	@Override
-	public ArrayList<Reply> selectReply(int bId) {
-		return bDAO.selectReply(sqlSession, bId);
-	}
-
-	@Override
-	public int insertReply(Reply r) {
-		return bDAO.insertReply(sqlSession, r);
-	}
-
+	
 	@Override
 	public ArrayList<Reply> tipcomment(PageInfo pi) {
 		return bDAO.tipcomment(sqlSession, pi);
 	}
-
-	//	@Override
-//	public ArrayList<Recipe> selectDivideRecipeList(DivideSearch ds) {
-//		return bDAO.selectDivideRecipeList(sqlSession,ds);
-//	}
-//
-//	@Override
-//	public ArrayList<Image> selectDivdeImageList(DivideSearch ds) {
-//		return bDAO.selectDivdeImageList(sqlSession,ds);
-//	}
 	
 	@Override
 	public int getTipListCount(String i) {
@@ -172,8 +162,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public ArrayList<Board> tipListView(PageInfo pi, String string) {
-		return bDAO.tipListView(sqlSession, pi, string);
+	public ArrayList<Board> tipListView(PageInfo pi, HashMap<String, String> map) {
+		return bDAO.tipListView(sqlSession, pi, map);
 	}
 
 	@Override
@@ -205,11 +195,54 @@ public class BoardServiceImpl implements BoardService {
 		return bDAO.deleteTip(sqlSession, bNo);
 	}
 
+	
 	@Override
-	public ArrayList<Board> searchTip(String searchType, String honeyKeyword) {
-		return bDAO.searchTip(sqlSession, searchType, honeyKeyword);
+	public int insertReply(Reply rp) {
+
+		return bDAO.insertReply(sqlSession, rp);
+	}
+
+	
+	@Override
+	public int deleteReply(int replyNo) {
+		
+		return bDAO.deleteReply(sqlSession, replyNo);
+	}
+
+	@Override
+	public int updateReply(Reply rp) {
+
+		return bDAO.updateReply(sqlSession, rp);
+	}
+
+	@Override
+	public Reply selectReply(Reply rp) {
+		
+		return bDAO.selectReply(sqlSession, rp);
+	}
+	
+	@Override
+	public ArrayList<Reply> rpList(int bNo) {
+		return bDAO.rpList(sqlSession, bNo);
 	}
 
 
-	    }
+	@Override
+	public ArrayList<Board> searchTip(String searchType, String honeyKeyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Notice noticeCommon() {
+		return null;
+	}
+
+
 	
+	
+	
+	
+	
+	
+}
