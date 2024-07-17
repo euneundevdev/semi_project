@@ -11,12 +11,12 @@
 #honey_title{background:#f9ae98;
 		width: 50%; height:50px;
 		margin-left:25%;
-		margin-top:80px;
 		margin-block-end:0;
-		text-align: center;
+		text-align:center;
 		text-decoration:none;
 		font-size:25px; font-weight:700;
-		line-height:50px; border-radius:5px;}	
+		line-height:50px; border-radius:5px;
+		}	
 		
 		
 #honey_up_del{width: 190px; 
