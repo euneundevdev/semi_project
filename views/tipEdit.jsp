@@ -17,6 +17,17 @@
     font-weight: normal;
     font-style: normal;
 }
+
+#honey_title{background:#f9ae98;
+				width: 50%; height:50px;
+				margin-left:25%;
+				margin-block-end:0;
+				margin-top: 80px;
+				text-align:center;
+				text-decoration:none;
+				font-size:25px; font-weight:700;
+				line-height:50px; border-radius:5px;}	
+
   </style>
 </head>
 <body>
@@ -24,16 +35,19 @@
     <jsp:include page="../common/header.jsp"/>
     
     <div class="container-fluid">
-        <br><br><br>
+       <div class="container-fluid">
+    	<div id="honey_title">
+    		<p>꿀팁 게시판</p>
+  		</div>
         
         
-        <br><br>
+      
 	<form class="needs-validation" method="POST" action="${contextPath}/update.tip">
         			<input type="hidden" value="${ b.boardNo }" name="boardNo"/>
 					<input type="hidden" value="${ page }" name="page"/>
             <div>
                 <div class="input-group mb-3" id="write_title">
-                    <input type="text" name="title" class="form-control" id="title" aria-label="Username" required aria-describedby="basic-addon1" value="${b.title}">
+                    <input style="text-size:20px" type="text" name="title" class="form-control" id="title" aria-label="Username" required aria-describedby="basic-addon1" value="${b.title}">
                 </div>
                 <div>
                     <textarea class="form-control" name="content" id="content" style="resize: none;">${b.content}</textarea>
@@ -48,7 +62,7 @@
         
         
                 <jsp:include page="../common/footer.jsp"/>
-        
+        </div>
         
 </body>
 </html>
