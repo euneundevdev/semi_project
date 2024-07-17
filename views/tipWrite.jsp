@@ -16,7 +16,17 @@
 	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Regular.woff') format('woff');
 	    font-weight: normal;
 	    font-size: 20px;
-	    font-style: normal;
+	    font-style: normal;}
+
+   #honey_title{background:#f9ae98;
+				width: 50%; height:50px;
+				margin-left:25%;
+				margin-block-end:0;
+				margin-top: 80px;
+				text-align:center;
+				text-decoration:none;
+				font-size:25px; font-weight:700;
+				line-height:50px; border-radius:5px;}	
 	    
 	    
 	    
@@ -34,9 +44,10 @@
     
     
     <div class="container-fluid">
-        <br><br><br>
-       
-        <br><br>
+    	<div id="honey_title">
+    		<p>꿀팁 게시판</p>
+  		</div>
+        
         <form action="${contextPath }/insert.tip" method="POST">
             <div>
                 <div class="input-group mb-3" id="write_title">
