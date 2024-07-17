@@ -1,17 +1,20 @@
 @charset "UTF-8";
 
-.container-fluid{background:#fffbf2; padding:0; min-width: 1200px;
-				font-family: "min-sans"; font-size:20px}
+.container-fluid{{background:#fffbf2; 
+				 min-width: 1250px;
+				 padding-top:80px;
+				 padding-bottom:25%;
+				font-family: 'MinSans-Regular'; font-size:20px}
 	
 #honey_title{background:#f9ae98;
-		width: 50%; height:50px;
-		margin-left:25%;
-		margin-top:80px;
-		margin-block-end:0;
-		text-align:center;
-		text-decoration:none;
-		font-size:25px; font-weight:700;
-		line-height:50px; border-radius:5px;}	
+				width: 50%; height:50px;
+				margin-left:25%;
+				margin-block-end:0;
+				margin-top: 80px;
+				text-align:center;
+				text-decoration:none;
+				font-size:25px; font-weight:700;
+				line-height:50px; border-radius:5px;}		
 
 	
 #loud_speaker:focus, #loud_speaker:active {
@@ -19,7 +22,7 @@
     box-shadow: none; 
 }
 
-#search_receipe2:focus, #search_receipe2:active {
+#searchHoneyKeyword:focus, #searchHoneyKeyword:active {
     outline: none;
     box-shadow: none; 
 }
@@ -59,8 +62,10 @@
 			margin-left:78%;}
 			
 			
-#honey_write_button{width:120px;   
-					border-radius:10px;}
+#honey_write_button, {
+		width:120px;   
+		border-radius:10px;
+}
 					
 #honey_write_button:hover {
 	font-weight: bold;
@@ -73,7 +78,6 @@
 				padding: 20px;			
 				border: 1px solid lightgray;
 				border-radius:10px;
-				
 				font-weight:100;}
 				
 #honey_table_div:hover{cursor: pointer;}				
@@ -90,7 +94,9 @@
 				text-decoration:none; 
 				font-size:20px
 				}
-#search_button{width:80px;}
+				
+#searchButton{width:80px;
+}
 
 #search_button:hover {
 	font-weight: bold;
@@ -106,5 +112,4 @@
 				margin-top:30px;
 				font-size:15px; text-decoration:none;
 				border:none; border-radius:15px;}
-
 
