@@ -1,10 +1,7 @@
 @charset "UTF-8";
 
-.container-fluid{{background:#fffbf2; 
-				 min-width: 1250px;
-				 padding-top:80px;
-				 padding-bottom:25%;
-				font-family: 'MinSans-Regular'; font-size:20px}
+.container-fluid{background:#fffbf2; padding:0; min-width: 1200px;
+				font-family: "min-sans"; font-size:20px}
 	
 #honey_title{background:#f9ae98;
 		width: 50%; height:50px;
@@ -21,7 +18,7 @@
     box-shadow: none; 
 }
 
-#searchHoneyKeyword:focus, #searchHoneyKeyword:active {
+#search_receipe2:focus, #search_receipe2:active {
     outline: none;
     box-shadow: none; 
 }
@@ -36,14 +33,6 @@
 	background: white;
 }
 
-#loud_speaker {
-            background: url('../image/food.png') no-repeat left center;
-            background-size:30px 30px;
-            padding-left: 55px; 
-            padding-right: 70px; 
-            background-position: 10px center;
-            height: 40px; 
-        }
 
 #honeySearchArea {
 	width: 40%;
@@ -61,10 +50,8 @@
 			margin-left:78%;}
 			
 			
-#honey_write_button, {
-		width:120px;   
-		border-radius:10px;
-}
+#honey_write_button{width:120px;   
+					border-radius:10px;}
 					
 #honey_write_button:hover {
 	font-weight: bold;
@@ -77,6 +64,7 @@
 				padding: 20px;			
 				border: 1px solid lightgray;
 				border-radius:10px;
+				
 				font-weight:100;}
 				
 #honey_table_div:hover{cursor: pointer;}				
@@ -93,14 +81,21 @@
 				text-decoration:none; 
 				font-size:20px
 				}
-				
-#searchButton{width:80px;
-}
+#search_button{width:80px;}
 
 #search_button:hover {
 	font-weight: bold;
 	background-color: #a5250a;
 }
+
+#loud_speaker {
+            background: url('../resources/image/food.png') no-repeat left center;
+            background-size:30px 30px;
+            padding-left: 55px; 
+            padding-right: 70px; 
+            background-position: 10px center;
+            height: 40px; 
+        }
 
 
 #go_top_button{background:#f24822; color:white;
@@ -111,5 +106,4 @@
 				margin-top:30px;
 				font-size:15px; text-decoration:none;
 				border:none; border-radius:15px;}
-
 
