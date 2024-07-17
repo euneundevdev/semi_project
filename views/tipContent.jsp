@@ -14,21 +14,17 @@
 	    font-family: 'MinSans-Regular';
 	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Regular.woff') format('woff');
 	    font-weight: normal;
+	    font-size: 20px;
 	    font-style: normal;
 	}
-	@font-face {
-	    font-family: 'MinSans-Bold';
-	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Bold.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
-	}
+	
 
 </style>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-<link href="../resources/css/tipContent.css?after" rel="stylesheet" type="text/css"/>
+<link href="resources/css/tipContent.css?after" rel="stylesheet" type="text/css"/>
 <title>Insert title here</title>
 
 </head>
@@ -55,17 +51,16 @@
 			<input type="hidden" value="${ b.boardNo }" name="bNo"/>
 			<input type="hidden" value="${ page }" name="page"/>
 				<div class="input-group mb-3" id="content_title">
-		 			<span style="width:12%;" class="form-control" id="notic_content_writer" aria-label="Username" aria-describedby="basic-addon1">${b.writer }</span>
-		 			<span style="width:73%;"class="form-control" id="notic_content_title" aria-label="Username" aria-describedby="basic-addon1">${b.title }</span>
-		 			<span style="width:15%;"class="form-control" id="notic_content_createDate" aria-label="Username" aria-describedby="basic-addon1">${b.createDate }</span>
+		 			<span style="width:12%; font-size: 20px;" class="form-control" id="honey_content_writer" aria-label="Username" aria-describedby="basic-addon1">${b.writer}</span>
+		 			<span style="width:73%;font-size: 20px;"class="form-control" id="honey_content_title" aria-label="Username" aria-describedby="basic-addon1">${b.title }</span>
+		 			<span style="width:15%;font-size: 20px;"class="form-control" id="honey_content_createDate" aria-label="Username" aria-describedby="basic-addon1">${b.updateDate }</span>
 				</div>
 
 				<div>
-					<p id="notic_content_text" style="resize: none;" readonly>${b.content }</p>
+					<p id="honey_content_text" style="resize: none;" readonly>${b.content }</p>
 				</div>		
 			</form>
 	</div>
-
 		<jsp:include page="../common/reply.jsp"/>
 
  		<div class="mx-auto" style="width: 80px;">
