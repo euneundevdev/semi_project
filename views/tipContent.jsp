@@ -64,8 +64,13 @@
 		<jsp:include page="../common/reply.jsp"/>
 
  		<div class="mx-auto" style="width: 80px;">
-               <a class="btn btn-primary me-md-2" href="${ contextPath }/tip.tip" role="button" id="go_list_button">목록</a>
-         </div>
+           <c:if test="${ empty myPage }">
+            <a class="btn btn-primary me-md-2" href="${ contextPath }/recipe.re" role="button" id="go_list_button">목록</a>
+         </c:if>
+         <c:if test="${ !empty myPage }">
+            <a class="btn btn-primary me-md-2" href="${ contextPath }/myBoardList.user?page=${page}" role="button" id="go_list_button">목록</a>
+         </c:if>
+      </div>
 	
 	<div class="modal fade" tabindex="-1" role="dialog" id="modalChoice">
 			<div class="modal-dialog" role="document">
