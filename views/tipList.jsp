@@ -6,64 +6,130 @@
 	<head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-	<link href="resources/css/tipList.css?after" rel="stylesheet" type="text/css"/>
+	
+    <link href="resources/css/tipWrite.css?after" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<title>Insert title here</title>	
 	<style>
-	
-	@font-face {
-	    font-family: 'MinSans-Regular';
-	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Regular.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
-	}
-	@font-face {
-	    font-family: 'MinSans-Bold';
-	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/MinSans-Bold.woff') format('woff');
-	    font-weight: normal;
-	    font-style: normal;
-	}
-	
-	#loud_speaker {
-            background: url('../image/food.png') no-repeat left center;
-            background-size:30px 30px;
-            padding-left: 55px; 
-            padding-right: 70px; 
-            background-position: 10px center;
-            height: 40px; 
-        }
-        
+	.container-fluid {
+    background: #fffbf2;
+    padding-top: 80px;
+    padding-bottom: 10%;
+    min-width: 1200px;
+    font-family: 'MinSans-Regular';
+    font-size: 20px;
 }
+
+.custom-select {
+    width: 10%;
+    font-size: 20px;
+    cursor: pointer;
+    background: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+#honey_table_div {
+    background: white;
+    width: 70%;
+    margin-left: 15%;
+    padding: 20px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    font-weight: 100;
+}
+
+#searchButton:focus, #searchButton:active {
+    outline: none;
+    box-shadow: none;
+}
+
+#honey_table_div:hover {
+    cursor: pointer;
+}
+
+#honeySearchArea {
+    width: 40%;
+    margin-left: 30%;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    background: white;
+}
+
+#honey_write_div {
+    width: 120px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    margin-left: 78%;
+}
+
+#honey_write_button {
+    width: 120px;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    text-decoration: none;
+    font-size: 20px;
+    background-color: #f24822;
+}
+
+#honey_write_button:hover {
+    font-weight: bold;
+    background-color: #a5250a;
+}
+
+#searchButton {
+    width: 80px;
+    background: #f24822;
+    color: white;
+    border: none;
+    height: 40px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+#searchButton:hover {
+    font-weight: bold;
+    background-color: #a5250a;
+}
+
+#searchHoneyKeyword:focus, #searchHoneyKeyword:active {
+    outline: none;
+    box-shadow: none;
+}
+
+
 	</style>
 	
 	</head>
 	<body>
 	
 		<jsp:include page="../common/header.jsp"/>
+
+
 		<div class="container-fluid">
 			
 			<div id="honey_title">
 	    		<p>꿀팁 게시판</p>
 	  		</div>
-			<br>
 	  		
 	  		<!-- 최근 공지 출력바 -->
-			<div id="notice_recent">
-		  		 <input class="form-control" id="loud_speaker" type="text" value="최근 공지사항이에요." aria-label="readonly input example" readonly>
-			</div>
-	  		
-	  		<br>
+	  		<jsp:include page="../notice/noticeCommon.jsp"/>
 	 		
 			<!--꿀팁 검색--> 		
 			<form>
 				<div class="input-group mb-3" id="honeySearchArea">
-				<select name="searchType">
-					<option value="writer" <c:if test="${searchType eq 'writer'}">selected</c:if>>작성자</option>
-					<option value="title" <c:if test="${searchType eq 'title'}">selected</c:if>>제목</option>
-					<option value="content" <c:if test="${searchType eq 'content'}">selected</c:if>>내용</option>
-				</option>
-			</select>
-		 			<input type="text" class="form-control" name="honeyKeyword" id="search_receipe2" placeholder="꿀팁 검색란" aria-label="Recipient's username" aria-describedby="search_button">
+					<select name="searchType"class="custom-select">
+						<option value="title" <c:if test="${searchType eq 'title'}">selected</c:if>>제목</option>
+						<option value="writer" <c:if test="${searchType eq 'writer'}">selected</c:if>>작성자</option>
+						<option value="content" <c:if test="${searchType eq 'content'}">selected</c:if>>내용</option>
+					</select>
+			
+		 			<input type="text" class="form-control" name="honeyKeyword" id="searchHoneyKeyword" placeholder="꿀팁 검색란" aria-label="Recipient's username" aria-describedby="search_button">
+	
 		 			<button class="btn btn-outline-secondary" id="searchButton">검색</button>
 				</div>
 			</form>	
@@ -119,23 +185,23 @@
 		       }
 		   };
 		
-		   const loud_speaker = document.getElementById("loud_speaker");
+// 		   const loud_speaker = document.getElementById("loud_speaker");
 			
-			$.ajax({
-				url : '${contextPath}/noticeCommon.no',
-				dataType : 'json',
-				success: data =>{
-					if(data != null){
-						loud_speaker.value = data.boardTitle;
+// 			$.ajax({
+// 				url : '${contextPath}/noticeCommon.no',
+// 				dataType : 'json',
+// 				success: data =>{
+// 					if(data != null){
+// 						loud_speaker.value = data.boardTitle;
 						
-						loud_speaker.addEventListener('click', ()=>{
-							location.href='${contextPath}/noticeSelect.no?boardNo='+data.boardNo;
-						});
+// 						loud_speaker.addEventListener('click', ()=>{
+// 							location.href='${contextPath}/noticeSelect.no?boardNo='+data.boardNo;
+// 						});
 						
-					}
-				},
-				error:data => console.log(data)
-			});
+// 					}
+// 				},
+// 				error:data => console.log(data)
+// 			});
 			
 		</script>
 	
